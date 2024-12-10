@@ -6,6 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const generateQrButton = document.getElementById('generateQrButton');
     const agreeSignText = document.getElementById('agreeSignText');
     const qrCard = document.getElementById('qrCard');
+    const contentContainer = document.querySelector('.content-container');
 
     let isLoading = false;
     let lastUpdateTime = Date.now();
@@ -31,8 +32,12 @@ document.addEventListener('DOMContentLoaded', function() {
         qrText.classList.add('active');
         lastUpdateTime = Date.now();
 
+        // Adjust the height of the content container dynamically
+        contentContainer.style.height = 'auto';
+
         if (generateQrButton.innerHTML == 'Inväntar ytterligare signeringar') {
-            generateQrButton.innerHTML = '';
+            // generateQrButton.innerHTML = '';
+            generateQrButton.style.display = 'none';
         }
     });
 
@@ -44,9 +49,26 @@ document.addEventListener('DOMContentLoaded', function() {
             qrImage.classList.remove('active');
             qrText.classList.remove('active');
 
+            // Reset the height of the content container
+            contentContainer.style.height = 'auto';
+
             if (generateQrButton.innerHTML == '') {
-                generateQrButton.innerHTML = 'Inväntar ytterligare signeringar';
+                // generateQrButton.innerHTML = 'Inväntar ytterligare signeringar';
+            generateQrButton.style.display = 'block';
             }
         }
     }, 1000);
+
+
+    document.querySelector('.sidebar-toggler').addEventListener('click', function() {
+        var helpTexts = document.querySelectorAll('.help-button-text');
+        helpTexts.forEach(function(text) {
+            text.classList.toggle('hidden');
+        });
+    });
+
+    document.querySelector('.cancel-bankid').addEventListener('click', function() {
+        document.getElementById('bankid-qr-code').classList.remove('current');
+        window.location.reload();
+    });
 });
