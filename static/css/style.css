@@ -3,7 +3,7 @@
     --secondary-color: #ccc;
     --text-color: white;
     --accent-color: black;
-    --border-radius: 7px;
+    --border-radius: 8px;
     --card-border-radius: 0px;
     --font-size-base: 1rem;
     --font-size-large: 1.2rem;
@@ -46,6 +46,7 @@ body {
     margin-bottom: var(--margin-large);
     width: 40%;
     padding: var(--padding-base);
+    border-radius: var(--border-radius);
 }
 
 #mainTextContainer {
