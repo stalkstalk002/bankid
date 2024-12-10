@@ -43,10 +43,27 @@ body {
 .content-container {
     background-color: white;
     text-align: center;
-    margin-bottom: var(--margin-large);
-    width: 40%;
-    padding: var(--padding-base);
+    margin-bottom: 0 auto 0 auto;;
+    width: 100%;
+    /* padding: var(--padding-base); */
     border-radius: var(--border-radius);
+    /* height: 400px; */
+
+    max-width: 400px;
+    /* display: grid; */
+    /* flex-grow: 2; */
+}
+
+.content-container {
+    background-color: white;
+    text-align: center;
+    margin: 0 auto;
+    width: 100%;
+    /* padding: var(--padding-base); */
+    border-radius: var(--border-radius);
+    /* Remove the fixed height */
+    /* height: 400px; */
+    max-width: 400px;
 }
 
 #mainTextContainer {
@@ -54,13 +71,18 @@ body {
     font-size: var(--font-size-large);
     color: var(--accent-color);
     font-weight: bold;
+    margin-top: 20px;
 }
 
 #agreeSignText {
     margin-bottom: var(--margin-base);
     display: block;
-    font-size: var(--font-size-base);
+    font-size: 1rem;
     color: var(--accent-color);
+    text-align: center;
+    margin-top: 35px;
+    padding: var(--padding-base);
+
 }
 
 button {
@@ -70,7 +92,8 @@ button {
     background-color: var(--primary-color);
     color: var(--text-color);
     border-radius: var(--border-radius);
-    margin-top: 5px;
+    margin: -5px 0 25px 0;
+    
 }
 
 .card {
@@ -93,8 +116,11 @@ button {
 }
 
 #qrImage {
-    width: 50%;
-    height: 50%;
+    /* width: 50%; */
+    /* height: 50%; */
+
+    width: 200px;
+    height: 200px;
     display: none;
     /* transition: all 0.3s ease; */
     /* animation: scaleIn 0.3s ease-out; */
@@ -131,6 +157,7 @@ button {
     color: var(--accent-color);
     /* transition: all 0.3s ease; */
     /* animation: scaleIn 0.3s ease-out; */
+    padding: var(--padding-base);
 }
 
 #qrText.active {
@@ -155,6 +182,18 @@ button {
     animation: 2.5s ease-in-out 0s infinite dash;
 }
 
+.footer {
+    text-align: center;
+    /* padding: var(--padding-base); */
+    /* background-color: var(--primary-color); */
+    /* color: var(--text-color); */
+
+    padding: 14px;
+    font-size: .813rem;
+    /* margin-top: auto; */
+    position: relative;
+    top: auto;
+}
 @keyframes dash {
     0% {
         stroke-dasharray: 1, 200;
@@ -210,7 +249,7 @@ button {
     }
 }
 
-/* Responsive Design */
+/* Responsive Design
 @media (max-width: 768px) {
     .content-container {
         width: 80%;
@@ -235,4 +274,39 @@ button {
     button {
         padding: var(--padding-base) 30px;
     }
-}
+} */
+
+
+
+
+
+    #bankid-qr-code {
+        margin-top: 15px;
+        /* padding: 20px; */
+        border-top: 0.1px solid #ccc;
+        border-radius: 10px;
+        /* background-color: transparent; */
+    }
+
+    .button-group {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+    
+    .link-button {
+        background-color: white;
+        color: var(--primary-color);
+        border: none;
+        margin: 0;
+
+    }
+
+    .link-button:hover {
+        /* background-color: #0056b3; */
+        text-decoration: underline;
+    }
+
+    .help-button-text.hidden {
+        display: none;
+    }
