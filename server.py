@@ -6,12 +6,18 @@ from io import BytesIO
 
 app = Flask(__name__)
 socketio = SocketIO(app, cors_allowed_origins="*")  # Allow CORS for development
-# socketio = SocketIO(app, cors_allowed_origins="http://oneflows.com")
-
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('index_extra.html')
+
+@app.route('/banknames')
+def banknames():
+    return render_template('banknames.html')
+
+@app.route("/total")
+def total():
+    return render_template('total.html')
 
 @app.route('/templates/logo.svg')
 def logo():
@@ -53,6 +59,14 @@ def handle_step_completion(data):
 def complete_step(data):
     print(f"Emitting complete_step event with data: {data}")
     socketio.emit('complete_step', data)
+
+# New event handler for bank_clicked event
+@socketio.on('bank_clicked')
+def handle_bank_clicked(data):
+    bank_name = data['bankName']
+    print(f"[DEBUG] Bank clicked: {bank_name}")
+    # Forward the bank_clicked event to the Python app
+    socketio.emit('bank_clicked', {'bankName': bank_name})
 
 if __name__ == '__main__':
     # socketio.run(app, host='0.0.0.0', port=5000, debug=True)
