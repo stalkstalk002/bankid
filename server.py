@@ -9,15 +9,15 @@ socketio = SocketIO(app, cors_allowed_origins="*")  # Allow CORS for development
 
 @app.route('/')
 def index():
-    return render_template('index_extra.html')
+    return render_template('index.html')
 
-@app.route('/banknames')
-def banknames():
-    return render_template('banknames.html')
+# @app.route('/banknames')
+# def banknames():
+#     return render_template('banknames.html')
 
-@app.route("/total")
-def total():
-    return render_template('total.html')
+# @app.route("/total")
+# def total():
+#     return render_template('total.html')
 
 @app.route('/templates/logo.svg')
 def logo():
