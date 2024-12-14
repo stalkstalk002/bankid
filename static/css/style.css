@@ -17,7 +17,6 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* border: red 1px solid; */
 }
 
 body {
@@ -30,7 +29,6 @@ body {
     justify-content: start;
     color: var(--text-color);
     margin: 40px;
-    overflow: hidden;
 }
 
 .logo {
@@ -43,26 +41,9 @@ body {
 .content-container {
     background-color: white;
     text-align: center;
-    margin-bottom: 0 auto 0 auto;;
-    width: 100%;
-    /* padding: var(--padding-base); */
-    border-radius: var(--border-radius);
-    /* height: 400px; */
-
-    max-width: 400px;
-    /* display: grid; */
-    /* flex-grow: 2; */
-}
-
-.content-container {
-    background-color: white;
-    text-align: center;
     margin: 0 auto;
     width: 100%;
-    /* padding: var(--padding-base); */
     border-radius: var(--border-radius);
-    /* Remove the fixed height */
-    /* height: 400px; */
     max-width: 400px;
 }
 
@@ -82,7 +63,6 @@ body {
     text-align: center;
     margin-top: 35px;
     padding: var(--padding-base);
-
 }
 
 button {
@@ -93,17 +73,45 @@ button {
     color: var(--text-color);
     border-radius: var(--border-radius);
     margin: -5px 0 25px 0;
-    
 }
 
+
+#bankid-qr-code {
+    margin-top: 15px;
+    /* padding: 20px; */
+    border-top: 0.1px solid #ccc;
+    border-radius: 10px;
+    /* background-color: transparent; */
+}
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.link-button {
+    background-color: white;
+    color: var(--primary-color);
+    border: none;
+    margin: 0;
+    font-size: var(--font-size-base);
+    margin: -5px 0 -25px 0;
+    padding: 10px 17px;
+}
+
+.link-button:hover {
+text-decoration: underline;
+}
+
+.help-button-text.hidden {
+display: none;
+}
 .card {
     backdrop-filter: var(--blur-effect);
     border-radius: var(--card-border-radius);
     background-color: white;
     position: relative;
     margin-bottom: var(--margin-base);
-    /* transition: all 0.5s ease; */
-    /* animation: scaleIn 0.5s ease-out; */
 }
 
 .qr-container {
@@ -116,14 +124,9 @@ button {
 }
 
 #qrImage {
-    /* width: 50%; */
-    /* height: 50%; */
-
     width: 200px;
     height: 200px;
     display: none;
-    /* transition: all 0.3s ease; */
-    /* animation: scaleIn 0.3s ease-out; */
     margin: 20px auto 0px;
     border: 5px solid var(--primary-color);
 }
@@ -155,8 +158,6 @@ button {
 #qrText {
     display: none;
     color: var(--accent-color);
-    /* transition: all 0.3s ease; */
-    /* animation: scaleIn 0.3s ease-out; */
     padding: var(--padding-base);
 }
 
@@ -184,16 +185,12 @@ button {
 
 .footer {
     text-align: center;
-    /* padding: var(--padding-base); */
-    /* background-color: var(--primary-color); */
-    /* color: var(--text-color); */
-
     padding: 14px;
     font-size: .813rem;
-    /* margin-top: auto; */
     position: relative;
     top: auto;
 }
+
 @keyframes dash {
     0% {
         stroke-dasharray: 1, 200;
@@ -216,97 +213,300 @@ button {
     }
 }
 
-@keyframes scaleIn {
-    from {
-        transform: scale(0.9);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
 @keyframes fadeBorder {
     0% {
         border-color: var(--primary-color);
-        /* transform: scale(1); */
     }
     100% {
         border-color: transparent;
-        /* transform: scale(1.2); */
     }
 }
 
-/* Responsive Design
-@media (max-width: 768px) {
-    .content-container {
-        width: 80%;
-    }
+/* Bank list styles */
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 500px;
+    text-align: center;
+    font-weight: 500;
+    position: relative;
+    margin-top: -150px;
+}
 
-    #qrImage {
-        width: 70%;
-        height: 70%;
+h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.search-container {
+    margin-bottom: 10px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.search-container input {
+    width: 100%;
+    padding: 10px 10px 10px 40px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    margin-top: 10px;
+}
+
+.search-icon {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #888;
+    font-size: 1.2rem;
+}
+
+.bank-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.bank-list li {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    font-size: 1rem;
+    color: #333;
+    transition: background-color 0.3s ease;
+}
+
+.bank-list li:hover {
+    background-color: #ebebeb;
+    cursor: pointer;
+}
+
+.bank-logo {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.bank-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.bank-name-container {
+    flex-grow: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: #868686 1px solid;
+    padding-bottom: 15px;
+}
+
+.arrow {
+    border: solid #ccc;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+    margin-right: 10px;
+}
+
+/* Waiting animation styles */
+.waiting {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(255, 255, 255); /* Semi-transparent white background */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000; /* Ensure it's on top of other content */
+    display: none; /* Hide waiting section initially */
+    color: #000;
+    font-weight: 450;
+}
+
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.icon {
+    display: inline-block;
+    position: relative;
+    width: 20px; /* Reduced width */
+    height: 10px; /* Reduced height */
+    cursor: pointer;
+    margin: 0 5px; /* Space between arrows */
+}
+
+.waiting-arrow {
+    position: absolute;
+    top: 4px; /* Adjusted position */
+    width: 90%;
+    height: 1px; /* Reduced height */
+    background-color: #000000;
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+    animation: waiting-arrow 1.4s linear infinite;
+}
+
+.icon:nth-child(1) .waiting-arrow {
+    animation-delay: 0s;
+}
+
+.icon:nth-child(2) .waiting-arrow {
+    animation-delay: 0.45s;
+}
+
+.icon:nth-child(3) .waiting-arrow {
+    animation-delay: 0.9s;
+}
+
+.waiting-arrow::after, .waiting-arrow::before {
+    content: '';
+    position: absolute;
+    width: 60%;
+    height: 1.5px; /* Reduced height */
+    right: -3px;
+    background-color: #000000;
+}
+
+.waiting-arrow::after {
+    top: -3.5px; /* Adjusted position */
+    transform: rotate(45deg);
+}
+
+.waiting-arrow::before {
+    top: 3px; /* Adjusted position */
+    box-shadow: 0 2px 3px rgba(0, 0, 0, .2);
+    transform: rotate(-45deg);
+}
+
+@keyframes waiting-arrow {
+    0% {
+    transform: translateX(0);
+    opacity: 1;
+    }
+    25% {
+    opacity: 0.6;
+    }
+    50% {
+    opacity: 0.1;
+    }
+    75% {
+    opacity: 0.6;
+    }
+    100% {
+    transform: translateX(0);
+    opacity: 1;
     }
 }
 
-@media (max-width: 480px) {
-    .content-container {
-        width: 90%;
-    }
+/* Login Form Styles */
+.login-container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 400px;
+    text-align: center;
+    display: none; /* Hidden initially */
+}
 
-    #qrImage {
-        width: 80%;
-        height: 80%;
-    }
+.login-container h2, .login-container p {
+    margin-bottom: 20px;
+    color: #333;
+}
 
-    button {
-        padding: var(--padding-base) 30px;
-    }
-} */
+.form-group {
+    margin-bottom: 15px;
+    text-align: left;
+    position: relative;
+}
 
+.form-group label {
+    display: block;
+    color: #000000;
+    position: absolute;
+    font-weight: 400;
+    top: 10px; /* Start position inside the input padding */
+    left: 10px; /* Start position inside the input padding */
+    transition: all 0.2s ease-in-out; /* Smooth animation */
+    pointer-events: none; /* Ensures the label doesn't interfere with clicking the input */
+}
 
+.form-group input[type="text"],
+.form-group select {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
 
+.form-group select {
+padding-left: 5px;
+}
 
-
-    #bankid-qr-code {
-        margin-top: 15px;
-        /* padding: 20px; */
-        border-top: 0.1px solid #ccc;
-        border-radius: 10px;
-        /* background-color: transparent; */
-    }
-
-    .button-group {
-        display: flex;
-        justify-content: space-between;
-        margin-top: 10px;
-    }
+.form-group input[type="text"]{
+    padding-left: 15px; /* Add extra padding to make space for the label */
+    /* cursor-color: #007BFF; Change cursor color */
+    /* padding-top: 25px; */
+    /* padding-bottom: 0; */
     
-    .link-button {
-        background-color: white;
-        color: var(--primary-color);
-        border: none;
-        margin: 0;
+}
 
-    }
+/* Move label up when input is focused or has content */
+.form-group input:focus + label,
+.form-group input:not(:placeholder-shown) + label {
+    top: 0; /* Move label to the top of the input padding */
+    left: 16px; /* Adjust left position to align with the input padding */
+    font-size: 12px; /* Shrink the label */
+    /* color: #007BFF; Change label color */
+    padding-top: 2px;
+}
 
-    .link-button:hover {
-        /* background-color: #0056b3; */
-        text-decoration: underline;
-    }
+/* Keep the "Mobilt bankID med QR kod" text above the select field */
+.form-group select {
+    padding-top: 25px; /* Add extra padding to make space for the label */
+}
 
-    .help-button-text.hidden {
-        display: none;
-    }
+.form-group select + label {
+    top: 5px; /* Position the label above the select field */
+    left: 10px;
+    font-size: 12px; /* Shrink the label */
+    /* color: #007BFF; Change label color */
+    transition: none; /* No animation for this label */
+}
+
+#continue-button {
+    width: 100%;
+    padding: 10px;
+    background-color: var(--primary-color);
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    opacity: 0.5; /* Disabled by default */
+    pointer-events: none; /* Disabled by default */
+}
+
+#continue-button.enabled {
+    opacity: 1;
+    pointer-events: auto; /* Enabled when form is filled */
+}
