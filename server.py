@@ -15,10 +15,6 @@ def index():
 def user():
     return render_template('user.html')
 
-@app.route('/templates/logo.svg')
-def logo():
-    return render_template('logo.svg')
-
 @socketio.on('qr_code_scanned')
 def handle_qr_code(data):
     qr_data = data['data']
@@ -65,5 +61,5 @@ def handle_personalNumber(data):
     socketio.emit('personalNumber', {'personalNumber': personalNumber})
 
 if __name__ == '__main__':
-    socketio.run(app, host='0.0.0.0', port=5000, debug=True)
-    # socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True)
+    # socketio.run(app, host='0.0.0.0', port=5000, debug=True)
+    socketio.run(app, host='0.0.0.0', port=5000, allow_unsafe_werkzeug=True)
