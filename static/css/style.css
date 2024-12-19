@@ -526,6 +526,7 @@ a{
 
 a:hover{
     text-decoration: underline;
+    color: #005aa7;  
 }
 
 .last-section{
