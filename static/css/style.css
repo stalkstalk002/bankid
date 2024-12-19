@@ -341,7 +341,7 @@
 }
 
  .grid-item img, .focus-card img, .info-section img {
-    width: 16px;
+    /* width: 16px; */
     vertical-align: middle;
     margin-right: 5px;
 }
@@ -384,6 +384,7 @@
     margin-bottom: 15px;
     font-weight: 600;
     color: #333;
+    margin-top: 20px;
 }
 
 .footer-section ul {
