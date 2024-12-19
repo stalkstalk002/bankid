@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link rel="icon" href="{{ url_for('static', filename='img/icons/logo-skatteverket-md.png') }}" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Skatteverket-like Layout</title>
+    <title>Startsida | Skatteverket</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
 </head>
@@ -22,7 +23,7 @@
             <a href="#"> <img src="{{ url_for('static', filename='img/icons/clap.svg') }}"><span>Teckenspråk</span></a>
             <a href="#"> <img src="{{ url_for('static', filename='img/icons/world.svg') }}"><span>Other languages</span></a>
             <a href="#"><img src="{{ url_for('static', filename='img/icons/contact.svg') }}"><span>Kontakta oss</span></a>
-            <button class="login-btn">Logga in</button>
+            <a href="/user" style="text-decoration: none;"><button class="login-btn">Logga in</button></a>
         </div>
 
         <!-- <div class="search-bar">
@@ -66,23 +67,23 @@
             </div>
             <div class="grid-item">
                 <h3>Om du har sålt en bostad</h3>
-                <p>>Direkt efter att du har sålt en bostad kan du fylla i och spara uppgifter om försäljningen. Du kan också få hjälp att räkna ut dina avdrag för renoveringar.</p>
-                <a href="#"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Försäljning av bostad</span> </a>
+                <p>Direkt efter att du har sålt en bostad kan du fylla i och spara uppgifter om försäljningen. Du kan också få hjälp att räkna ut dina avdrag för renoveringar.</p>
+                <a href="/user"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Försäljning av bostad</span> </a>
             </div>
             <div class="grid-item">
                 <h3>Flyttanmälan</h3>
                 <p>Anmäl flytt för dig själv och eventuella familjemedlemmar som bor med dig.</p>
-                <a href="#"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Flyttanmälan</span> </a>
+                <a href="/user"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Flyttanmälan</span> </a>
             </div>
             <div class="grid-item">
                 <h3>Se din skattetabell</h3>
                 <p>Här kan du se din skattetabell för 2025. Du behöver veta var du är folkbokförd för att få fram rätt tabell.</p>
-                <a href="#"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Skattetabeller</span> </a>
+                <a href="/user"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Skattetabeller</span> </a>
             </div>
             <div class="grid-item">
                 <h3>Chatta med oss</h3>
                 <p>Har du som privatperson frågor om skatt? Vi finns tillgängliga alla vardagar på chatt via Mina sidor. Chatten har ordinarie öppettider vardagar klockan 9–15.</p>
-                <a href="#"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Mina sidor</span> </a>
+                <a href="/user"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Mina sidor</span> </a>
             </div>
         </div>
     </main>
@@ -94,17 +95,17 @@
                 <div class="focus-card">
                     <h3>Schysst julhandel</h3>
                     <p>Julen står för dörren och tradition är att gå på julmarknader. Genom att ta kvitto kan du som kund vara säker på att försäljningen har slagits in i kassan och att säljaren betalar skatt på köpet.</p>
-                    <a href="#"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"><span>Ta kvitto – för en schysst julhandel</span></a>
+                    <a href="/user"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"><span>Ta kvitto – för en schysst julhandel</span></a>
                 </div>
                 <div class="focus-card">
                     <h3>Anmäl flytt till ny bostad</h3>
                     <p>När du flyttar behöver du göra en anmälan om det till Skatteverket så att du blir folkbokförd på den nya bostadsadressen. Anmäl enkelt och kostnadsfritt hos oss.</p>
-                    <a href="#"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"><span>Flytta i jul? Tänk på det här!</span></a>
+                    <a href="/user"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"><span>Flytta i jul? Tänk på det här!</span></a>
                 </div>
                 <div class="focus-card">
                     <h3>Jämka för lån utan säkerhet</h3>
                     <p>Rätten till avdrag för ränteutgifter på lån utan säkerhet trappas av på två år. Du som jämkat för inkomståret 2025 kan behöva lämna in en ny ansökan för att undvika kvarskatt.</p>
-                    <a href="#"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"><span>Jämkning – betala rätt skatt från början</span></a>
+                    <a href="/user"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"><span>Jämkning – betala rätt skatt från början</span></a>
                 </div>
             </div>
         </section>
