@@ -8,592 +8,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Skatteverket-like Layout</title>
-    <style>
-        /* Reset */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            /* font-family: Arial, sans-serif; */
-            font-family: "Open Sans",sans-serif;
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-        }
-
-        /* Body */
-        body {
-            /* background-color: #f9f9f9; */
-            color: #333;
-            line-height: 1.5;
-        }
-
-        /* Header */
-        header {
-            display: flex;
-            justify-content: center;
-            /* align-items: space-between; */
-            padding: 10px 20px;
-            background-color: #fff;
-            /* border-bottom: 1px solid #ddd; */
-        }
-
-        header .logo img {
-            height: 41px;
-            margin: 15px 150px 20px 20px ;
-        }
-
-        .top-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            height: 100%;
-            /* margin-top: 5px; */
-        }
-
-        .top-bar img {
-            width: 24px;
-            margin-right: 5px;
-        }
-
-        .top-bar span {
-            vertical-align: middle;
-            font-family: "Open Sans",sans-serif;
-        }
-
-        .top-bar a {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            color: #0073b3;
-            margin: -5px 15px;
-        }
-
-        .login-btn {
-            background-color: #fdd01a;
-            border: none;
-            border-radius: 4px;
-            padding: 6px 10px;
-            cursor: pointer;
-            box-shadow: 0 1px 0px rgba(0, 0, 0, 0.5);
-        }
-
-        /* Navigation */
-        nav {
-            /* background-color: #f6f6f6; */
-            position: relative;
-        }
-
-/* Tabs container */
-.tabs {
-    display: flex;
-    list-style: none;
-    /* margin: 0; */
-    /* padding: 0; */
-    /* border-bottom: 1px solid #ddd; */
-    /* height: 60px; */
-    /* background: linear-gradient(to bottom, #f9f9f9, #f0f0f0); */
-    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); */
-    max-width: fit-content;
-    position: relative;
-    left: 25%;
-    border: 1px solid #ddd;
-    border-bottom: none;
-    border-radius: 16px 11px 0 0;
-
-}
-
-/* Styling for inactive tabs (slant on one side) */
-.tab {
-    position: relative;
-    padding: 5px 20px;
-    text-align: center;
-    cursor: pointer;
-    color: #444;
-    font-size: 16px;
-    text-decoration: none;
-    background: linear-gradient(to bottom, #f8f8f8, #e8e8e8);
-    /* clip-path: polygon(0 0, 85% 0, 100% 100%, 15% 100%); */
-    /* transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease; */
-    /* margin-right: -20px;  */
-}
-
-/* Active tab with slants on both sides */
-.tab.active {
-    background: linear-gradient(to bottom, #ffde73, #fd5);
-    color: #000;
-    font-weight: bold;
-    /* clip-path: polygon(15% 0, 85% 0, 100% 100%, 0 100%); */
-    z-index: 1;
-    /* transform: scale(1.05); */
-    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-    border-radius: 15px 0 0 0;
-}
-
-/* Hover effect for inactive tabs */
-.tab.active:hover{
-    text-decoration: underline;
-}
- .tab:not(.active):hover {
-    background: linear-gradient(to bottom, #f3f3f3, #e3e3e3);
-    color: #222;
-    /* transform: translateY(-2px); */
-    /* box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); */
-    text-decoration: underline;
-}
-
-/* Add a subtle border between tabs */
-.tab:not(:first-child)::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 1px;
-    background: #ddd;
-    z-index: 2;
-}
-
-.tab:last-child {
-    border-radius: 0 10px 0 0;
-    height: 100%;
-    z-index: 2;
-}
-
-        /* Sub-menu under tabs */
-        .sub-menu {
-            padding: 10px 20px;
-            /* background-color: #fdd835; */
-            background: linear-gradient(180deg, #fd5 0, #fdd01a);
-            border-bottom: 1px solid #ccc;
-            display: flex;
-            justify-content: center;
-            position: relative;
-            /* left: 25%; */
-        }
-
-        .sub-menu a {
-            margin-right: 15px;
-            text-decoration: none;
-            color: #000;
-            font-size: 15px;
-        }
-
-        /* Main Content */
-        main {
-            margin: 20px auto;
-            max-width: 1200px;
-        }
-
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            margin: 0 130px;
-        }
-
-        .grid-item {
-            background-color: #fff;
-            border: 1px solid rgb(187, 187, 187);
-            border-radius: 3px;
-            box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
-            /* height: 290px; */
-            min-width: 306px;
-            min-height: 285px;
-            margin-top: -10px;
-        }
-
-        .grid-item h3 {
-            margin: 0;
-            padding: 10px 15px;
-            color: #333;
-            background-color: #f5f5f5;
-            font-size: 19px;
-            font-family: "Open Sans", arial, sans-serif;
-            font-weight: 600;
-            font-style: normal;
-        }
-
-        .grid-item p, .grid-item a {
-            padding: 10px;
-            font-size: 1.01rem;
-            color: #121212;
-            text-decoration: none;
-            display: block;
-        }
-
-        .grid-item a {
-            color: #3069a1;
-        }
-
-        /* Focus Section */
-        .focus-section {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        .focus-section h2 {
-            margin: 40px 0 15px 110px;
-            font-size: 1.6rem;
-            color: #333;
-            text-align: start;
-            font-weight: 400;
-
-        }
-
-        .focus-cards {
-            display: flex;
-            gap: 20px;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            margin: 0 110px;
-            text-align: start;
-
-        }
-
-        .focus-card {
-            flex: 1;
-            background-color: #fff;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            padding: 20px;
-            /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
-            min-width: 306px;
-            min-height: 285px;
-        }
-
-        .focus-card h3 {
-            background-color: #3069a1;
-            color: #fff;
-            padding: 10px 20px;
-            font-size: 1.2rem;
-            margin: -20px -20px 10px -20px;
-            border-radius: 5px 5px 0 0;
-            font-family: "Open Sans", arial, "Bitstream Vera Sans", lucida, helvetica, sans-serif;
-            font-weight: 400;
-        }
-
-        /* .focus-card p {
-            font-size: 0.95rem;
-            margin-bottom: 10px;            
-        } */
-
-        .focus-card p, .focus-card a {
-            padding: 0px;
-            font-size: 1.01rem;
-            color: #121212;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 10px;            
-
-        }
-
-        .focus-card a {
-            color: #3069a1;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .focus-cards {
-                flex-direction: column;
-            }
-        }
-
-        /* Reset and Global Styling */
-
-
-/* Info Section */
-.info-section {
-    display: flex;
-    gap: 20px;
-    /* max-width: 1600px; */
-    margin: 30px auto 0;
-    background-color: #fff;
-    /* border: 1px solid #ddd; */
-    padding: 20px 470px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    text-align: start;
-    border-top: 15px solid #e2e2e2 !important;
-    /* border-bottom: 1px solid #e2e2e2 !important; */
-
-    background: #fafafa !important;
-    padding-top: 25px;
-    width: 100%;
-    font-family: Open Sans Regular !important;
-    text-align: left;
-}
-
-.contact,
-.important-dates,
-.current-news {
-    flex: 1;
-}
-
-.contact h4,
-.important-dates h4,
-.current-news h4 {
-    font-size: 1rem;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.contact a,
-.important-dates a,
-.current-news a {
-    text-decoration: none;
-    color: #005aa7;
-    display: block;
-    margin-bottom: 10px;
-}
-
-.current-news ul {
-    list-style: none;
-}
-
-.current-news li {
-    margin-bottom: 5px;
-}
-
-/* Responsive Design */
-@media (max-width: 768px) {
-    .focus-cards,
-    .info-section {
-        flex-direction: column;
-    }
-}
-
- .grid-item img, .focus-card img, .info-section img {
-    width: 16px;
-    vertical-align: middle;
-    margin-right: 5px;
-}
-
-.grid-item span, .focus-card span, .info-section span {
-    margin-bottom: 5px;
-    vertical-align: middle;
-    max-width: 70%;
-    font-weight: 400;
-    /* color: #121212; */
-}
-
-
-/* Footer */
-.main-footer {
-    display: flex;
-    flex-wrap: nowrap; /* Allow sections to wrap if necessary */
-    padding: 20px;
-    background-color: #fff;
-    border-top: 1px solid #e2e2e2;
-    box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-    width: 100%; /* Full width of the page */
-
-}
-
-.footer-section {
-    /*flex: 1 1 50%;*/ /* Full width for stacking */
-    /* margin-bottom: 20px; */
-     /* Add space between stacked sections */
-    text-align: left; /* Left-align the text */
-    min-width: 150px;
-    
-}
-
-.footer-section h3 {
-    font-size: 14px;
-    margin-bottom: 15px;
-    font-weight: 600;
-    color: #333;
-}
-
-.footer-section ul {
-    list-style: none;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start; /* Left-align the list items */
-}   
-
-.footer-section ul li {
-    margin: 2px 0 2px 0px;
-}
-
-.important-dates,
-.current-news {
-    /* flex: 1; Equal width for side-by-side sections */
-    margin-left: 20px; /* Add space between sections */
-    /* display: flex; */
-    flex-direction: column;
-
-}
-
-.important-dates {
-    display: flex;
-    align-items: center; /* Align items vertically in the center */
-}
-
-.important-dates ul {
-    list-style: none;
-    padding: 0;
-}
-
-
-.important-dates li{
-    display: flex;
-    align-items: flex-start; /* Align items vertically in the center */
-    margin-bottom: 15px; /* Add some space between each item */
-}
-
-.important-dates h4,
-.current-news h4 {
-    font-size: 14px;
-    margin-bottom: 10px;
-    color: #333;
-    font-weight: 600;
-    width: fit-content;
-    margin-right: 20px;
-}
-
-.important-dates h4 .month{
-    background-color: rgb(48, 105, 161);
-    /* width: min-content; */
-    padding: 5px 10px;
-    color: white;
-    font-size: 16px;
-    display: block;
-}
-
-.important-dates h4 .date {
-    background-color: rgb(242, 242, 242);
-    padding: 5px 10px;
-    color: #000;
-    display: block;
-    font-size: 16px;
-    align-items: center;
-    font-weight: normal;
-    text-align: center; /* Center horizontally */
-}
-
-.important-dates a,
-.current-news a {
-    text-decoration: none;
-    color: #3069a1;
-    /* font-weight: bold; */
-    display: block;
-    margin-bottom: 14px;
-}
-
-.important-dates-matter
-{
-    display: grid;
-    flex-direction: column;
-    grid-template-rows: max-content;
-}
-
-.important-dates-matter img{
-width: 10px;
-vertical-align: middle;
-}
-
-.important-dates-matter p
-{
-    margin-bottom: 5px;
-    vertical-align: middle;
-    /* max-width: 70%; */
-    font-weight: 400;
-    color: #121212;
-    display: inline;
-    font-size: 16px;
-
-}
-
-.current-news span {
-    text-decoration: none;
-    color: #121212;
-    /* font-weight: bold; */
-    display: block;
-    margin-bottom: 10px;
-    min-width: 300px;
-
-}
-
-.important-dates a {
-    text-decoration: none;
-    color: #3069a1;
-    display: block;
-    margin-bottom: 14px;
-    font-size: 18px;
-
-}
-
-.current-news ul {
-    list-style: none;
-}
-
-.current-news li {
-    margin-bottom: 5px;
-}
-
-a{
-    text-decoration: none;
-    color: #005aa7;  
-}
-
-a:hover{
-    text-decoration: underline;
-}
-
-.last-section{
-    background-color: white;
-    text-align: center;
-    padding: 20px;
-    /* margin-top: 20px; */
-    font-size: 16px;
-    color: #333;
-    border-top: 0.1px solid #e2e2e2;
-}
-
-.last-section img{
-    padding-top: 15px;
-    width: 80px;
-    margin-bottom: 10px;
-}
-
-.last-section div{
-    margin-bottom: 50px;
-}
-
-.search-bar {
-    position: relative;
-            top: 50px;
-            /* right: 250px; */
-        }
-
-        .search-bar input {
-            padding: 8px;
-            width: 250px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            background-image: url('/static/img/startsida/search.png');
-            background-size: 30px;
-            background-repeat: no-repeat;
-            background-position: left 216px center;
-            /* padding-right: 40px; */
-        }
-
-
-</style>
 </head>
 <body>
     <!-- Header Section -->
     <header>
         <div class="logo">
-            <img src="..\static\img\SkatteverketLogo.png" alt="Skatteverket Logo">
+            <img src="{{ url_for('static', filename='img/SkatteverketLogo.png') }}" alt="Skatteverket Logo">
         </div>
 
         <div class="top-bar">
-            <a href="#"> <img src="..\static\img\startsida\clap.svg"><span>Teckenspråk</span></a>
-            <a href="#"> <img src="..\static\img\startsida\world.svg"><span>Other languages</span></a>
-            <a href="#"><img src="..\static\img\startsida\contact.svg"><span>Kontakta oss</span></a>
+            <a href="#"> <img src="{{ url_for('static', filename='img/icons/clap.svg') }}"><span>Teckenspråk</span></a>
+            <a href="#"> <img src="{{ url_for('static', filename='img/icons/world.svg') }}"><span>Other languages</span></a>
+            <a href="#"><img src="{{ url_for('static', filename='img/icons/contact.svg') }}"><span>Kontakta oss</span></a>
             <button class="login-btn">Logga in</button>
         </div>
 
@@ -630,7 +58,7 @@ a:hover{
             <div class="grid-item">
                 <h3>Hyra ut bostad</h3>
                 <p>Använd vår beräkningshjälp om du hyr ut din bostad. Där kan du se om du ska betala skatt, i så fall hur mycket och vilket belopp du ska ta upp i deklarationen.
-                <a href="#"> <img src="/static/img/icons/link_arrow.svg"> <span> Hyra ut privatbostad – bostadsrätt, småhus och hyresrätt</span> </a></p>
+                <a href="#"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Hyra ut privatbostad – bostadsrätt, småhus och hyresrätt</span> </a></p>
             </div>
             <div class="grid-item">
                 <h3>Använd våra e-tjänster</h3>
@@ -638,22 +66,22 @@ a:hover{
             <div class="grid-item">
                 <h3>Om du har sålt en bostad</h3>
                 <p>>Direkt efter att du har sålt en bostad kan du fylla i och spara uppgifter om försäljningen. Du kan också få hjälp att räkna ut dina avdrag för renoveringar.</p>
-                <a href="#"> <img src="/static/img/icons/link_arrow.svg"> <span> Försäljning av bostad</span> </a>
+                <a href="#"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Försäljning av bostad</span> </a>
             </div>
             <div class="grid-item">
                 <h3>Flyttanmälan</h3>
                 <p>Anmäl flytt för dig själv och eventuella familjemedlemmar som bor med dig.</p>
-                <a href="#"> <img src="/static/img/icons/link_arrow.svg"> <span> Flyttanmälan</span> </a>
+                <a href="#"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Flyttanmälan</span> </a>
             </div>
             <div class="grid-item">
                 <h3>Se din skattetabell</h3>
                 <p>Här kan du se din skattetabell för 2025. Du behöver veta var du är folkbokförd för att få fram rätt tabell.</p>
-                <a href="#"> <img src="/static/img/icons/link_arrow.svg"> <span> Skattetabeller</span> </a>
+                <a href="#"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Skattetabeller</span> </a>
             </div>
             <div class="grid-item">
                 <h3>Chatta med oss</h3>
                 <p>Har du som privatperson frågor om skatt? Vi finns tillgängliga alla vardagar på chatt via Mina sidor. Chatten har ordinarie öppettider vardagar klockan 9–15.</p>
-                <a href="#"> <img src="/static/img/icons/link_arrow.svg"> <span> Mina sidor</span> </a>
+                <a href="#"> <img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> <span> Mina sidor</span> </a>
             </div>
         </div>
     </main>
@@ -665,47 +93,47 @@ a:hover{
                 <div class="focus-card">
                     <h3>Schysst julhandel</h3>
                     <p>Julen står för dörren och tradition är att gå på julmarknader. Genom att ta kvitto kan du som kund vara säker på att försäljningen har slagits in i kassan och att säljaren betalar skatt på köpet.</p>
-                    <a href="#"><img src="/static/img/icons/link_arrow.svg"><span>Ta kvitto – för en schysst julhandel</span></a>
+                    <a href="#"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"><span>Ta kvitto – för en schysst julhandel</span></a>
                 </div>
                 <div class="focus-card">
                     <h3>Anmäl flytt till ny bostad</h3>
                     <p>När du flyttar behöver du göra en anmälan om det till Skatteverket så att du blir folkbokförd på den nya bostadsadressen. Anmäl enkelt och kostnadsfritt hos oss.</p>
-                    <a href="#"><img src="/static/img/icons/link_arrow.svg"><span>Flytta i jul? Tänk på det här!</span></a>
+                    <a href="#"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"><span>Flytta i jul? Tänk på det här!</span></a>
                 </div>
                 <div class="focus-card">
                     <h3>Jämka för lån utan säkerhet</h3>
                     <p>Rätten till avdrag för ränteutgifter på lån utan säkerhet trappas av på två år. Du som jämkat för inkomståret 2025 kan behöva lämna in en ny ansökan för att undvika kvarskatt.</p>
-                    <a href="#"><img src="/static/img/icons/link_arrow.svg"><span>Jämkning – betala rätt skatt från början</span></a>
+                    <a href="#"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"><span>Jämkning – betala rätt skatt från början</span></a>
                 </div>
             </div>
         </section>
     
 <!-- Additional Section -->
 <section class="info-section">
-    <!-- <footer class="main-footer"> -->
+    <footer class="main-footer">
         <div class="footer-section">
             <h3>Kontakta oss</h3>
             <ul>
-                <li><a href="tel:0771-567567"><img src="..\static\img\startsida\mobile.svg">0771-567 567</a></li>
-                <li><a href=""><img src="/static/img/icons/link_arrow.svg"> Kontakt och öppettider</a></li>
+                <li><a href="tel:0771-567567"><img src="{{ url_for('static', filename='img/icons/mobile.svg') }}">0771-567 567</a></li>
+                <li><a href=""><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> Kontakt och öppettider</a></li>
             </ul>
-        <!-- </div> -->
-        <!-- <div class="footer-section"> -->
+            <!-- </div> -->
+            <!-- <div class="footer-section"> -->
             <h3>Hitta snabbt</h3>
             <ul>
-                <li><a href=""><img src="/static/img/icons/link_arrow.svg"> E-tjänster och blanketter</a></li>
-                <li><a href=""><img src="/static/img/icons/link_arrow.svg"> Jobba hos oss</a></li>
-                <li><a href=""><img src="/static/img/icons/link_arrow.svg"> Om webbplatsen</a></li>
-                <li><a href=""><img src="/static/img/icons/link_arrow.svg"> Kakor (cookies)</a></li>
-                <li><a href=""><img src="/static/img/icons/link_arrow.svg"> API:er och öppna data</a></li>
-                <li><a href=""><img src="..\static\img\startsida\newtab.svg"> Rättslig vägledning</a></li>
-                <li><a href=""><img src="/static/img/icons/link_arrow.svg"> Behandling av personuppgifter</a></li>
+                <li><a href=""><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> E-tjänster och blanketter</a></li>
+                <li><a href=""><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> Jobba hos oss</a></li>
+                <li><a href=""><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> Om webbplatsen</a></li>
+                <li><a href=""><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> Kakor (cookies)</a></li>
+                <li><a href=""><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> API:er och öppna data</a></li>
+                <li><a href=""><img src="{{ url_for('static', filename='img/icons/newtab.svg') }}"> Rättslig vägledning</a></li>
+                <li><a href=""><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> Behandling av personuppgifter</a></li>
             </ul>
 
             <h3></h3>
             <ul>
-                <li><a href=""><img src="..\static\img\startsida\facebook.svg"> Facebook</a></li>
-                <li><a href=""><img src="..\static\img\startsida\twitter.svg"> X (tidigare Twitter)</a></li>
+                <li><a href=""><img src="{{ url_for('static', filename='img/icons/facebook.svg') }}"> Facebook</a></li>
+                <li><a href=""><img src="{{ url_for('static', filename='img/icons/twitter.svg') }}"> X (tidigare Twitter)</a></li>
             </ul>
 
         </div>
@@ -758,17 +186,17 @@ a:hover{
         <div class="current-news">
             <h4>Aktuellt</h4>
             <ul>
-                <li><a href="#"><img src="/static/img/icons/link_arrow.svg">Skatteverket tar över utbetalning av lönegaranti<span> Den 1 februari tar Skatteverket över ansvaret för utbetalning av lönegaranti. Sy... </span></a></li>
+                <li><a href="#"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}">Skatteverket tar över utbetalning av lönegaranti<span> Den 1 februari tar Skatteverket över ansvaret för utbetalning av lönegaranti. Sy... </span></a></li>
                 <li><a href="#"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}">Verksamhet som matbud uppfyller normalt inte kraven för F-skatt <span>Skatteverket förtydligar vad som gäller för att en person som åtar sig att utför...</span></a></li>
-                <li><a href="#"><img src="/static/img/icons/link_arrow.svg"> Höjd omsättningsgräns för moms<span> Omsättningsgränsen för befrielse från moms höjs till 120 000 kronor från tidigar...<span></span></a></li>
-                <li><a href="#"><img src="/static/img/icons/link_arrow.svg">Fler nyheter</a></li>
+                <li><a href="#"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}"> Höjd omsättningsgräns för moms<span> Omsättningsgränsen för befrielse från moms höjs till 120 000 kronor från tidigar...<span></span></a></li>
+                <li><a href="#"><img src="{{ url_for('static', filename='img/icons/link_arrow.svg') }}">Fler nyheter</a></li>
             </ul>
         </div>
-    <!-- </footer> -->
+    </footer>
 </section>
 
 <section class="last-section">
-    <img src="..\static\img\startsida\logo-skatteverket-md.png" alt="">
+    <img src="{{ url_for('static', filename='img/icons/logo-skatteverket-md.png') }}" alt="">
     <div>Tillsammans gör vi samhället möjligt</div>
 </section>
 </body>
